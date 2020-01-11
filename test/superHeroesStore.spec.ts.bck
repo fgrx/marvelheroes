@@ -1,0 +1,13 @@
+import Vuex from 'vuex'
+import { buildVuexFromNuxt } from '~/tests/mocks/nuxt-store.mock'
+
+import * as superHeroesStore from '~/store/superHeroes'
+
+describe('Store superHeroes', () => {
+	test('fetch Heroes list', async () => {
+        const store = new Vuex.Store(buildVuexFromNuxt(superHeroesStore, 'superHeroesStore'))
+        const getHeroes = await store.dispatch('superHeroesStore/fetchSuperHeros');
+        console.log(getHeroes)
+		expect(getHeroes).toBe(true);
+	});
+});
