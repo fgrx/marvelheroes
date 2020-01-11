@@ -24,18 +24,21 @@
                 </v-img>
               </v-col>
               <v-col>
-                <div class="numberOfComics" v-if="hero.comics.available">
+                <div v-if="hero.comics.available" class="numberOfComics">
                   Comics available : {{ hero.comics.available }}
                 </div>
                 <div class="lastcomics">
                   <ul>
-                    <li v-for="comic in hero.comics.items">
+                    <li v-for="comic in lastTheeComics">
                       {{ comic.name }}
                     </li>
                   </ul>
                 </div>
-
-                <div class="description" v-if="hero.description">
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <div v-if="hero.description" class="description">
                   <h3>Description</h3>
                   {{ hero.description }}
                 </div>
@@ -58,7 +61,8 @@ export default {
   data() {
     return {
       hero: {},
-      loading: true
+      loading: true,
+      lastTheeComics: {}
     }
   },
   async mounted() {
@@ -66,7 +70,7 @@ export default {
       'superHeroes/retrieveHero',
       this.$route.params.id
     )
-    console.log('mon hero', this.hero.thumbnail.path)
+    this.lastTheeComics = this.hero.comics.items.splice(0, 3)
     this.loading = false
   }
 }
