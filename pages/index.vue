@@ -39,15 +39,16 @@ export default {
   data() {
     return {
       superHeroes: this.$store.state.superHeroes.superHeroes,
-      loading: true,
+      loading: false,
       searchHeroesParams: {
         heroesListOffset: 100,
         nubmerOfHeroes: 24
       }
     }
   },
-  async created() {
+  async mounted() {
     if (this.$store.getters['superHeroes/getSuperHeroes'].length === 0) {
+      this.loading = true
       await this.$store.dispatch(
         'superHeroes/fetchSuperHeroes',
         this.searchHeroesParams
