@@ -1,6 +1,15 @@
 <template>
   <div>
-    <v-btn class="top-button" fab dark color="primary" absolute top left to="/">
+    <v-btn
+      @click="backPage()"
+      class="top-button"
+      fab
+      dark
+      color="primary"
+      absolute
+      top
+      left
+    >
       <v-icon dark>mdi-arrow-left</v-icon></v-btn
     >
 
@@ -77,6 +86,17 @@ export default {
     )
     this.lastTheeComics = this.hero.comics.items.splice(0, 3)
     this.loading = false
+  },
+  methods: {
+    backPage() {
+      const numberOfEntries = window.history.length
+
+      if (numberOfEntries > 2) {
+        this.$router.back()
+      } else {
+        this.$router.push({ path: '/' })
+      }
+    }
   }
 }
 </script>
