@@ -16,7 +16,8 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^3.0.0-0",
     "js-md5": "^0.7.3",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vue-scroll-behavior": "^0.2.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0",
