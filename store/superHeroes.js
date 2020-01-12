@@ -7,9 +7,7 @@ const getCredentials = () => {
 
   const hash = md5(timestamp.toString() + privateKey + publicKey)
 
-  const credentials = `ts=${timestamp}&hash=${hash}&apikey=${publicKey}`
-  //   console.log('credentials', credentials)
-  return credentials
+  return { publicKey, timestamp, hash }
 }
 
 export const state = () => ({
@@ -30,12 +28,17 @@ export const getters = {
 
 export const actions = {
   async fetchSuperHeroes({ commit }, params) {
-    const urlApiMarvel =
-      `https://gateway.marvel.com:443/v1/public/characters?limit=${params.nubmerOfHeroes}&offset=${params.heroesListOffset}&` +
-      getCredentials()
+    const credentials = getCredentials()
+
+    const urlApiMarvel = `https://gateway.marvel.com:443/v1/public/characters?limit=${params.nubmerOfHeroes}&offset=${params.heroesListOffset}`
 
     const result = await this.$axios({
       method: 'get',
+      params: {
+        apikey: credentials.publicKey,
+        ts: credentials.timestamp,
+        hash: credentials.hash
+      },
       url: urlApiMarvel
     })
 
@@ -48,12 +51,17 @@ export const actions = {
     })
   },
   async retrieveHero({ commit }, characterId) {
-    const urlApiMarvel =
-      `https://gateway.marvel.com:443/v1/public/characters/${characterId}?` +
-      getCredentials()
+    const credentials = getCredentials()
+
+    const urlApiMarvel = `https://gateway.marvel.com:443/v1/public/characters/${characterId}?`
 
     const result = await this.$axios({
       method: 'get',
+      params: {
+        apikey: credentials.publicKey,
+        ts: credentials.timestamp,
+        hash: credentials.hash
+      },
       url: urlApiMarvel
     })
 

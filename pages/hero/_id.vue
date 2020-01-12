@@ -25,9 +25,14 @@
               </v-col>
               <v-col>
                 <div v-if="hero.comics.available" class="numberOfComics">
-                  Comics available : {{ hero.comics.available }}
+                  <strong>{{ hero.comics.available }} comics available</strong>
+                  :
                 </div>
-                <div class="lastcomics">
+                <div
+                  v-if="Object.keys(lastTheeComics).length > 0"
+                  class="lastcomics"
+                >
+                  <strong>Last 3 comics : </strong>
                   <ul>
                     <li v-for="comic in lastTheeComics">
                       {{ comic.name }}
