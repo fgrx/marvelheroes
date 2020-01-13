@@ -1,7 +1,8 @@
-# marvel_heroes
+# Simple Marvel Heroes Browser
 
-> Marvel Heroes Browser
-Try it now on [marvelheroes.now.sh]:https://marvelheroes.now.sh
+A simple browser that shows b-side super heroes of the Marvel Universe
+
+Try it now on https://marvelheroes.now.sh
 
 ## Install Setup
 
@@ -26,3 +27,4 @@ $ npm run generate
 1. Unit testing
 2. Implement Optimistic user interface
 3. Implement Session storage
+4. Secure credentials
