@@ -1,10 +1,13 @@
 # marvel_heroes
 
 > Marvel Heroes Browser
+Try it now on [marvelheroes.now.sh]:https://marvelheroes.now.sh
 
-## Build Setup
+## Install Setup
 
 ``` bash
+# clone the project
+
 # install dependencies
 $ npm run install
 
@@ -19,4 +22,7 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## Features to come
+1. Unit testing
+2. Implement Optimistic user interface
+3. Implement Session storage
