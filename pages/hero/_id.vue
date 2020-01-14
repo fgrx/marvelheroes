@@ -79,6 +79,19 @@ export default {
       lastTheeComics: {}
     }
   },
+  head() {
+    return {
+      title: this.hero.name,
+      meta: [
+        // hid est utilisé comme identifiant unique. N'utilisez pas `vmid` car ça ne fonctionnera pas
+        {
+          hid: 'description',
+          name: 'description',
+          content: `All details about ${this.hero.name}`
+        }
+      ]
+    }
+  },
   async mounted() {
     this.hero = await this.$store.dispatch(
       'superHeroes/fetchHero',

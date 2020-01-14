@@ -25,6 +25,6 @@ $ npm run generate
 
 ## Features to come
 1. Unit testing
-2. Implement Optimistic user interface
-3. Implement Session storage
-4. Secure credentials
+2. End to End testing
+3. Meta
+
