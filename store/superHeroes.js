@@ -1,14 +1,4 @@
-const getCredentials = () => {
-  const md5 = require('js-md5')
-
-  const privateKey = 'a35fac4f14c1d750cc525d7bbb32db4b9606939a'
-  const publicKey = 'cfbc23f403e4efeb1db18fef0a9123d7'
-  const timestamp = new Date().getTime()
-
-  const hash = md5(timestamp.toString() + privateKey + publicKey)
-
-  return { publicKey, timestamp, hash }
-}
+import { getCredentials } from '../app.config.js'
 
 export const state = () => ({
   superHeroes: []
@@ -30,14 +20,16 @@ export const actions = {
   async fetchSuperHeroes({ commit }, params) {
     const credentials = getCredentials()
 
-    const urlApiMarvel = `https://gateway.marvel.com:443/v1/public/characters?limit=${params.nubmerOfHeroes}&offset=${params.heroesListOffset}`
+    const urlApiMarvel = `https://gateway.marvel.com:443/v1/public/characters`
 
     const result = await this.$axios({
       method: 'get',
       params: {
         apikey: credentials.publicKey,
         ts: credentials.timestamp,
-        hash: credentials.hash
+        hash: credentials.hash,
+        limit: params.nubmerOfHeroes,
+        offset: params.heroesListOffset
       },
       url: urlApiMarvel
     })
@@ -46,11 +38,15 @@ export const actions = {
 
     const heroes = result.data.data.results
 
+    // Mise à jour du store
+    window.localStorage.clear()
+    window.localStorage.setItem('heroes', JSON.stringify(heroes))
+
     heroes.forEach((hero) => {
       commit('ADD_HERO', hero)
     })
   },
-  async retrieveHero({ commit }, characterId) {
+  async fetchHero({ commit }, characterId) {
     const credentials = getCredentials()
 
     const urlApiMarvel = `https://gateway.marvel.com:443/v1/public/characters/${characterId}?`

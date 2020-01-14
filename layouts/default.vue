@@ -6,7 +6,7 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer :fixed="fixed" app>
+    <v-footer app>
       Fabien Grignoux -&nbsp;
       <a href="https://www.developpeurfullstack.fr">developpeurfullstack.fr</a>
     </v-footer>

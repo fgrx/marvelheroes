@@ -38,7 +38,7 @@ export default {
   },
   data() {
     return {
-      superHeroes: this.$store.state.superHeroes.superHeroes,
+      superHeroes: JSON.parse(window.localStorage.getItem('heroes')),
       loading: false,
       searchHeroesParams: {
         heroesListOffset: 100,
@@ -47,12 +47,15 @@ export default {
     }
   },
   async mounted() {
+    // this.superHeroes = JSON.parse(window.localStorage.getItem('heroes'))
+
     if (this.$store.getters['superHeroes/getSuperHeroes'].length === 0) {
       this.loading = true
       await this.$store.dispatch(
         'superHeroes/fetchSuperHeroes',
         this.searchHeroesParams
       )
+      this.superHeroes = this.$store.state.superHeroes.superHeroes
       this.loading = false
     }
   },

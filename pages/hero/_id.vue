@@ -81,7 +81,7 @@ export default {
   },
   async mounted() {
     this.hero = await this.$store.dispatch(
-      'superHeroes/retrieveHero',
+      'superHeroes/fetchHero',
       this.$route.params.id
     )
     this.lastTheeComics = this.hero.comics.items.splice(0, 3)
