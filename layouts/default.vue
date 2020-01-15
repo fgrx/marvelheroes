@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import logo from '~/components/logo.vue'
 
 export default {
   components: {
-    Logo
+    logo
   }
 }
 </script>

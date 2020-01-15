@@ -2,8 +2,8 @@ import { mutations } from '../../store/superHeroes.js'
 
 const { ADD_HERO } = mutations
 
-describe('mutations', () => {
-  test('ADD_HERO', () => {
+describe('test get heros', () => {
+  test('get all heroes', () => {
     // mock state
     const state = { superHeroes: {} }
     const Hero = { name: 'Batman', description: 'not a marvel hero' }

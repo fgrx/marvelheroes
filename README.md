@@ -8,6 +8,8 @@ Try it now on https://marvelheroes.now.sh
 
 ``` bash
 # clone the project
+git clone https://github.com/fgrx/marvelheroes.git
+cd marvelheroes
 
 # install dependencies
 $ npm run install
@@ -23,8 +25,13 @@ $ npm run start
 $ npm run generate
 ```
 
+## Covers
+* Axios to get Rest Api requestes
+* Vuex for managing store 
+* Localstorage to speedup Marvel Heroes List
+* Vuetify
+
+
 ## Features to come
 1. Unit testing
 2. End to End testing
-3. Meta
-

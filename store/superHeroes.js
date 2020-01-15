@@ -60,7 +60,7 @@ export const actions = {
       },
       url: urlApiMarvel
     })
-
+    console.log(JSON.stringify(result.data.data.results[0], '', 4))
     if (!result.status === 200) alert(`Une erreur a eu lieu : $(result.status)`)
 
     return result.data.data.results[0]

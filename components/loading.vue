@@ -10,3 +10,12 @@
     </div>
   </v-container>
 </template>
+
+<script>
+export default {
+  name: 'loading',
+  mount() {
+    console.log('coucou loading')
+  }
+}
+</script>
