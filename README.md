@@ -29,7 +29,7 @@ $ npm run generate
 
 - Axios to get Rest Api requestes
 - Vuex for store management
-- Localstorage & Lazyloading to speedup Marvel Heroes List
+- Lazyloading to speedup Marvel Heroes List
 - Vuetify
 
 ## Features to come

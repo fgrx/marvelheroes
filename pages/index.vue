@@ -62,7 +62,8 @@ export default {
   },
   data() {
     return {
-      superHeroes: JSON.parse(window.localStorage.getItem('heroes')),
+      // superHeroes: JSON.parse(window.localStorage.getItem('heroes')),
+      superHeroes: this.$store.state.superHeroes.superHeroes,
       favoritesHeroes: this.$store.getters['superHeroes/getFavoritesHeroes'],
       loading: false,
       searchHeroesParams: {
@@ -90,20 +91,27 @@ export default {
         'superHeroes/fetchSuperHeroes',
         this.searchHeroesParams
       )
-
-      this.superHeroes = this.$store.state.superHeroes.superHeroes
       this.loading = false
     }
   },
   methods: {
     async showMoreHeroes() {
       this.loading = true
-      this.searchHeroesParams.heroesListOffset += this.searchHeroesParams.nubmerOfHeroes
+
+      const newOffset =
+        this.$store.state.superHeroes.offset +
+        this.searchHeroesParams.nubmerOfHeroes
+
+      this.$store.dispatch('superHeroes/setOffset', newOffset)
+
+      this.searchHeroesParams.heroesListOffset = newOffset
 
       await this.$store.dispatch(
         'superHeroes/fetchSuperHeroes',
         this.searchHeroesParams
       )
+
+      // this.superHeroes = this.$store.state.superHeroes.superHeroes
 
       this.loading = false
     }

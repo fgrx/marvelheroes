@@ -2,7 +2,8 @@ import { getCredentials } from '../app.config.js'
 
 export const state = () => ({
   superHeroes: [],
-  favoritesHeros: []
+  favoritesHeros: [],
+  offset: 100
 })
 
 export const mutations = {
@@ -20,6 +21,9 @@ export const mutations = {
 
     if (isFavorite === false)
       state.favoritesHeros.splice(state.favoritesHeros.indexOf(hero), 1)
+  },
+  SET_OFFSET(state, increment) {
+    state.offset = increment
   }
 }
 
@@ -29,6 +33,9 @@ export const getters = {
   },
   getFavoritesHeroes: (state) => {
     return state.favoritesHeros
+  },
+  getOffset: (state) => {
+    return state.offset
   }
 }
 
@@ -57,9 +64,6 @@ export const actions = {
     heroes.forEach((hero) => {
       commit('ADD_HERO', hero)
     })
-
-    // Mise à jour du store dans le localstorage
-    window.localStorage.setItem('heroes', JSON.stringify(heroes))
   },
   async fetchHero({ state, getters }, characterId) {
     const credentials = getCredentials()
@@ -85,5 +89,8 @@ export const actions = {
   setToFavorites({ commit }, payload) {
     const { hero, isFavorite } = payload
     commit('SET_AS_FAVORITE', { hero, isFavorite })
+  },
+  setOffset({ commit }, increment) {
+    commit('SET_OFFSET', increment)
   }
 }
