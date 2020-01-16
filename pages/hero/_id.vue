@@ -134,7 +134,7 @@ export default {
         'superHeroes/getFavoritesHeroes'
       ]
 
-      if (favoritesHeroes.length >= 5 && this.hero.isFavorite === false) {
+      if (favoritesHeroes.length >= 5 && this.isFavorite === false) {
         alert('You can only have 5 favorites heroes.')
       } else {
         this.isFavorite = !this.isFavorite

@@ -44,8 +44,8 @@ export default {
       'superHeroes/getFavoritesHeroes'
     ]
 
-    if (favoritesHeroes.find((target) => target.id === this.hero.id)) {
-      this.hero.isFavorite = true
+    if (favoritesHeroes.some((target) => target.id === this.hero.id)) {
+      this.isFavorite = true
       this.iconHeart = 'mdi-heart'
     }
   },
