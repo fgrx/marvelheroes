@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/scrollbehavior.js'],
+  plugins: ['@/plugins/scrollbehavior.js', '~/plugins/lazyload.js'],
   /*
    ** Nuxt.js dev-modules
    */

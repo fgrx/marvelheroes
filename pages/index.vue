@@ -50,7 +50,6 @@ export default {
     return {
       title: 'Home of the Marvel Heroes browser',
       meta: [
-        // hid est utilisé comme identifiant unique. N'utilisez pas `vmid` car ça ne fonctionnera pas
         {
           hid: 'description',
           name: 'description',
@@ -60,8 +59,6 @@ export default {
     }
   },
   async mounted() {
-    // this.superHeroes = JSON.parse(window.localStorage.getItem('heroes'))
-
     if (this.$store.getters['superHeroes/getSuperHeroes'].length === 0) {
       this.loading = true
       await this.$store.dispatch(

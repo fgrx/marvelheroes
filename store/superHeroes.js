@@ -1,23 +1,47 @@
 import { getCredentials } from '../app.config.js'
 
 export const state = () => ({
-  superHeroes: []
+  superHeroes: [],
+  favoritesHeros: []
 })
 
 export const mutations = {
   ADD_HERO(state, hero) {
     state.superHeroes.push(hero)
+  },
+  SET_AS_FAVORITE(state, payload) {
+    const { hero, isFavorite } = payload
+
+    if (
+      isFavorite === true &&
+      !state.favoritesHeros.some((heroTarget) => heroTarget.id === hero.id)
+    )
+      state.favoritesHeros.push(hero)
+
+    if (isFavorite === false)
+      state.favoritesHeros = state.favoritesHeros.filter(
+        (heroTarget) => heroTarget.id !== hero.id
+      )
+
+    // Sauvegarde dans le localstore
+    window.localStorage.setItem(
+      'favoritesHeros',
+      JSON.stringify(state.favoritesHeros)
+    )
   }
 }
 
 export const getters = {
   getSuperHeroes: (state) => {
     return state.superHeroes
+  },
+  getFavoritesHeroes: (state) => {
+    return state.favoritesHeros
   }
 }
 
 export const actions = {
-  async fetchSuperHeroes({ commit }, params) {
+  async fetchSuperHeroes({ commit, getters }, params) {
     const credentials = getCredentials()
 
     const urlApiMarvel = `https://gateway.marvel.com:443/v1/public/characters`
@@ -38,15 +62,14 @@ export const actions = {
 
     const heroes = result.data.data.results
 
-    // Mise à jour du store
-    window.localStorage.clear()
-    window.localStorage.setItem('heroes', JSON.stringify(heroes))
-
     heroes.forEach((hero) => {
       commit('ADD_HERO', hero)
     })
+
+    // Mise à jour du store dans le localstorage
+    window.localStorage.setItem('heroes', JSON.stringify(heroes))
   },
-  async fetchHero({ commit }, characterId) {
+  async fetchHero({ state, getters }, characterId) {
     const credentials = getCredentials()
 
     const urlApiMarvel = `https://gateway.marvel.com:443/v1/public/characters/${characterId}?`
@@ -60,9 +83,15 @@ export const actions = {
       },
       url: urlApiMarvel
     })
-    console.log(JSON.stringify(result.data.data.results[0], '', 4))
+
     if (!result.status === 200) alert(`Une erreur a eu lieu : $(result.status)`)
 
-    return result.data.data.results[0]
+    const hero = result.data.data.results[0]
+
+    return hero
+  },
+  setToFavorites({ commit }, payload) {
+    const { hero, isFavorite } = payload
+    commit('SET_AS_FAVORITE', { hero, isFavorite })
   }
 }

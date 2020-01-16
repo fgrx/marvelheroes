@@ -11,7 +11,6 @@ describe('Home', () => {
     const wrapper = shallowMount(IndexPage, {
       localVue
     })
-    console.log('wrapper : ', wrapper.html())
     expect(wrapper.html()).toContain('<h1>Marvel Super Heroes</h1>')
   })
 })

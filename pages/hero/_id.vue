@@ -18,7 +18,12 @@
         <v-layout row wrap>
           <loading v-if="loading" />
           <div v-if="!loading">
-            <h1>{{ hero.name }}</h1>
+            <h1>
+              <v-btn @click="setToFavs()"
+                ><v-icon dark>{{ iconHeart }}</v-icon></v-btn
+              >
+              {{ hero.name }}
+            </h1>
             <v-row>
               <v-col>
                 <v-img
@@ -76,7 +81,9 @@ export default {
     return {
       hero: {},
       loading: true,
-      lastTheeComics: {}
+      lastTheeComics: {},
+      iconHeart: 'mdi-heart-outline',
+      isFavorite: false
     }
   },
   head() {
@@ -97,7 +104,19 @@ export default {
       'superHeroes/fetchHero',
       this.$route.params.id
     )
+
     this.lastTheeComics = this.hero.comics.items.splice(0, 3)
+
+    // Is this one of my favorite Hero ?
+    const favoritesHeroes = this.$store.getters[
+      'superHeroes/getFavoritesHeroes'
+    ]
+
+    if (favoritesHeroes.find((target) => target.id === this.hero.id))
+      this.isFavorite = true
+
+    this.iconHeart = this.isFavorite ? 'mdi-heart' : 'mdi-heart-outline'
+
     this.loading = false
   },
   methods: {
@@ -108,6 +127,24 @@ export default {
         this.$router.back()
       } else {
         this.$router.push({ path: '/' })
+      }
+    },
+    setToFavs() {
+      const favoritesHeroes = this.$store.getters[
+        'superHeroes/getFavoritesHeroes'
+      ]
+
+      if (favoritesHeroes.length >= 5 && this.hero.isFavorite === false) {
+        alert('You can only have 5 favorites heroes.')
+      } else {
+        this.isFavorite = !this.isFavorite
+
+        this.$store.dispatch('superHeroes/setToFavorites', {
+          hero: this.hero,
+          isFavorite: this.isFavorite
+        })
+
+        this.iconHeart = this.isFavorite ? 'mdi-heart' : 'mdi-heart-outline'
       }
     }
   }
