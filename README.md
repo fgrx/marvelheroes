@@ -28,7 +28,7 @@ $ npm run generate
 ## Covers
 
 - Axios to get Rest Api requestes
-- Vuex for managing store
+- Vuex for store management
 - Localstorage & Lazyloading to speedup Marvel Heroes List
 - Vuetify
 

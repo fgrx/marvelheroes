@@ -19,15 +19,7 @@ export const mutations = {
       state.favoritesHeros.push(hero)
 
     if (isFavorite === false)
-      state.favoritesHeros = state.favoritesHeros.filter(
-        (heroTarget) => heroTarget.id !== hero.id
-      )
-
-    // Sauvegarde dans le localstore
-    window.localStorage.setItem(
-      'favoritesHeros',
-      JSON.stringify(state.favoritesHeros)
-    )
+      state.favoritesHeros.splice(state.favoritesHeros.indexOf(hero), 1)
   }
 }
 
@@ -41,7 +33,7 @@ export const getters = {
 }
 
 export const actions = {
-  async fetchSuperHeroes({ commit, getters }, params) {
+  async fetchSuperHeroes({ commit }, params) {
     const credentials = getCredentials()
 
     const urlApiMarvel = `https://gateway.marvel.com:443/v1/public/characters`
