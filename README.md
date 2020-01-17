@@ -31,6 +31,7 @@ $ npm run generate
 - Vuex for store management
 - Lazyloading to speedup Marvel Heroes List
 - Vuetify
+- PWA support
 
 ## Features to come
 
